@@ -32,7 +32,7 @@ createRoot(document.getElementById('root')).render(
       <ul>
         <li>{restaurants[1].reviews[0].text}</li>
         <li>{restaurants[1].reviews[1].text}</li>
-        <li>{restaurants[1].reviews[1].text}</li>
+        <li>{restaurants[1].reviews[2].text}</li>
       </ul>
     </article>
 
@@ -69,6 +69,7 @@ createRoot(document.getElementById('root')).render(
     </article>
   </>
 
+// via createElement
   // createElement(
   //   Fragment,
   //   null,
