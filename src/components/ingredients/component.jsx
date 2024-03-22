@@ -1,7 +1,7 @@
 import { Ingredient } from '../ingredient/component';
 
 export const Ingredients = ({ ingredients }) => {
-  console.log(ingredients);
+  // console.log(ingredients);
   return (
     <div>
       <h4>Ingredients:</h4>
