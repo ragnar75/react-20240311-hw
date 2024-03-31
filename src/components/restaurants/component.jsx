@@ -2,28 +2,39 @@ import { useState } from 'react';
 import { restaurants } from '../../constants/mock';
 import { Restaurant } from '../restaurant/component';
 import { RestaurantTabs } from '../restaurant-tabs/component';
+import { getStorageItem, setStorageItem } from '../../utils/storage';
+
 export const Restaurants = () => {
-  const [currentRestaurantIndex, setCurrentRestaurantIndex] = useState(
-    () => Number(localStorage.getItem('currentRestaurantIndex')) || 0
+  const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(
+    () =>
+      Number(
+        getStorageItem(import.meta.env.VITE_ACTIVE_RESTAURANT_INDEX_STORAGE_KEY)
+      ) || 0
   );
   const rests = restaurants.filter(Boolean);
-  const currentRestaurant = rests[currentRestaurantIndex];
+  const activeRestaurant = rests[activeRestaurantIndex];
   // if (!restaurants) {
   //   return null;
   // }
 
   return (
     <main>
-      {/* Question: Why is CurrentRestaurantIIndex different from the index when displayed in the console, 
-      although when the corresponding component is displayed, the index is the same as CurrentRestaurantIndex?
-       */}
-
       <RestaurantTabs
-        rests={rests}
-        onTabClick={setCurrentRestaurantIndex}
-        currentIndex={currentRestaurantIndex}
+        restaurants={rests}
+        onTabClick={(index) => {
+          setActiveRestaurantIndex(index);
+          setStorageItem(
+            import.meta.env.VITE_ACTIVE_RESTAURANT_INDEX_STORAGE_KEY,
+            index
+          );
+        }}
+        activeTabIndex={activeRestaurantIndex}
       />
-      {currentRestaurant && <Restaurant restaurant={currentRestaurant} />}
+      {activeRestaurant ? (
+        <Restaurant restaurant={activeRestaurant} />
+      ) : (
+        <span>Select Restaurant</span>
+      )}
     </main>
   );
 };

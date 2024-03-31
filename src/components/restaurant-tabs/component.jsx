@@ -1,20 +1,16 @@
 import { Tab } from '../tab/component';
 
-export const RestaurantTabs = ({ rests, onTabClick, currentIndex }) => {
+export const RestaurantTabs = ({ restaurants, onTabClick, activeTabIndex }) => {
   return (
     <nav>
-      {!!rests?.length &&
-        rests.map((restaurant, index) => (
-          // Question: Why is CurrentRestaurantIIndex(currentIndex) different from the index when displayed in the console,
-          // although when the corresponding component is displayed, the index is the same as CurrentRestaurantIndex?
+      {!!restaurants?.length &&
+        restaurants.map((restaurant, index) => (
           <Tab
             key={restaurant.id}
             title={restaurant.name}
-            isActive={index === currentIndex}
+            isActive={index === activeTabIndex}
             onClick={() => {
               onTabClick(index);
-              localStorage.setItem("currentRestaurantIndex", index);
-              console.log(index, currentIndex);
             }}
           />
         ))}

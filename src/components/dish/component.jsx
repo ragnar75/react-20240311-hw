@@ -1,26 +1,19 @@
-import { useState } from 'react';
 import { Ingredients } from '../ingredients/component';
+import { Counter } from '../counter/component';
+import { useCounter } from '../../hooks/use-counter';
 
 export const Dish = ({ dish }) => {
-  const [counter, setCounter] = useState(0);
+  const { amount, decrement, increment } = useCounter();
+
   return (
     <div>
       <p>
         {dish.name}{' '}
-        <button
-          style={{ marginLeft: '30px' }}
-          onClick={() => setCounter((counter) => counter + 1)}
-          disabled={counter > 4}
-        >
-          +
-        </button>
-        <span style={{ margin: '0 5px' }}> {counter} </span>
-        <button
-          onClick={() => setCounter((counter) => counter - 1)}
-          disabled={counter < 1}
-        >
-          -
-        </button>
+        <Counter
+          value={amount}
+          decrement={decrement}
+          increment={increment}
+        />
       </p>
       <p>Price: {dish.price}</p>
       <Ingredients ingredients={dish.ingredients} />

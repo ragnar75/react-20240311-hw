@@ -7,7 +7,6 @@ export const Reviews = ({ reviews }) => {
       <ul>
         {!!reviews?.length &&
           reviews.filter(Boolean).map((review) => (
-            // added key with unique ids to prevent errors in the console
             <li key={review.id}>
               <Review review={review} />
             </li>
