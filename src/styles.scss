@@ -1,0 +1,41 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+button {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 1rem;
+}
+
+h2 {
+  margin: 15px 0 5px 0;
+}
+
+h3,
+h4 {
+  margin: 5px 0;
+}
+
+ul {
+  margin: 0 0 10px 0;
+}
+
+p {
+  margin: 0 0 5px 0;
+}
+
+@mixin btn {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

@@ -4,6 +4,8 @@ import { Restaurant } from '../restaurant/component';
 import { RestaurantTabs } from '../restaurant-tabs/component';
 import { getStorageItem, setStorageItem } from '../../utils/storage';
 
+import styles from './styles.module.scss';
+
 export const Restaurants = () => {
   const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(
     () =>
@@ -31,7 +33,10 @@ export const Restaurants = () => {
         activeTabIndex={activeRestaurantIndex}
       />
       {activeRestaurant ? (
-        <Restaurant restaurant={activeRestaurant} />
+        <Restaurant
+          restaurant={activeRestaurant}
+          className={styles.container}
+        />
       ) : (
         <span>Select Restaurant</span>
       )}

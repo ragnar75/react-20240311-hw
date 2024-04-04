@@ -1,0 +1,13 @@
+@use '../../styles.scss';
+
+.primary {
+  @include styles.btn;
+  background-color: #0a5ed7;
+  color: #fff;
+}
+
+.secondary {
+  @include styles.btn;
+  background-color: #6a757d;
+  color: #fff;
+}
