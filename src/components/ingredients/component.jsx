@@ -1,19 +1,19 @@
 import { Ingredient } from '../ingredient/component';
+import styles from './styles.module.scss'
 
 export const Ingredients = ({ ingredients }) => {
-  // console.log(ingredients);
   return (
-    <div>
-      <h4>Ingredients:</h4>
-      <ul>
+    <div className={styles.ingredients}>
+      <span><em>{'('}Ingredients: </em></span>
+      <ul className={styles.ingredientsList}>
         {!!ingredients?.length &&
-          ingredients.filter(Boolean).map((ingredient, idx) => (
-            // added key with unique ids to prevent errors in the console
+          ingredients?.filter(Boolean).map((ingredient, idx) => (
             <li key={idx}>
               <Ingredient ingredient={ingredient} />
             </li>
           ))}
       </ul>
+      <span><em>{')'}</em></span>
     </div>
   );
 };

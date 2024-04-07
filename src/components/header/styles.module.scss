@@ -1,9 +1,16 @@
+@use '../../styles.scss';
+
 .root {
   height: 50px;
   background-color: burlywood;
-  // border-bottom: 2px solid black;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.btnHeader {
+  @include styles.btn;
+  background-color: #009153;
+  color: #fff;
+  margin: 0 0 0 30px;
 }

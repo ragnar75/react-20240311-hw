@@ -1,1 +1,5 @@
-export const Ingredient = ({ingredient}) => <span>{ingredient}</span>
+export const Ingredient = ({ ingredient }) => (
+  <span>
+    <em>{ingredient}</em>
+  </span>
+);

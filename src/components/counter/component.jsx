@@ -1,7 +1,7 @@
 import classNames from 'classnames';
+import { Button } from '../button/component';
 import styles from './styles.module.scss';
-import { useContext } from 'react';
-import { HeaderContext } from '../../contexts/header';
+
 
 export const Counter = ({
   value,
@@ -11,25 +11,21 @@ export const Counter = ({
   max = 5,
   className,
 }) => {
-  const { theme } = useContext(HeaderContext);
-
   return (
     <span className={classNames(styles.root, className)}>
-      <button
+      <Button
         onClick={decrement}
         disabled={value <= min}
-        className={theme === 'default' ? styles.primary : styles.secondary}
       >
         -
-      </button>
+      </Button>
       <span> {value} </span>
-      <button
+      <Button
         onClick={increment}
         disabled={value >= max}
-        className={theme === 'default' ? styles.primary : styles.secondary}
       >
         +
-      </button>
+      </Button>
     </span>
   );
 };

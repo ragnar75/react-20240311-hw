@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { restaurants } from '../../constants/mock';
 import { Restaurant } from '../restaurant/component';
 import { RestaurantTabs } from '../restaurant-tabs/component';
 import { getStorageItem, setStorageItem } from '../../utils/storage';
@@ -7,38 +6,32 @@ import { getStorageItem, setStorageItem } from '../../utils/storage';
 import styles from './styles.module.scss';
 
 export const Restaurants = () => {
-  const [activeRestaurantIndex, setActiveRestaurantIndex] = useState(
-    () =>
-      Number(
-        getStorageItem(import.meta.env.VITE_ACTIVE_RESTAURANT_INDEX_STORAGE_KEY)
-      ) || 0
+  const [activeRestaurantId, setActiveRestaurantId] = useState(() =>
+    getStorageItem(import.meta.env.VITE_ACTIVE_RESTAURANT_INDEX_STORAGE_KEY)
   );
-  const rests = restaurants.filter(Boolean);
-  const activeRestaurant = rests[activeRestaurantIndex];
-  // if (!restaurants) {
-  //   return null;
-  // }
 
   return (
     <main>
       <RestaurantTabs
-        restaurants={rests}
-        onTabClick={(index) => {
-          setActiveRestaurantIndex(index);
+        activeRestaurantId={activeRestaurantId}
+        onTabClick={(activeRestaurantId) => {
+          setActiveRestaurantId(activeRestaurantId);
           setStorageItem(
             import.meta.env.VITE_ACTIVE_RESTAURANT_INDEX_STORAGE_KEY,
-            index
+            activeRestaurantId
           );
         }}
-        activeTabIndex={activeRestaurantIndex}
       />
-      {activeRestaurant ? (
+
+      {activeRestaurantId ? (
         <Restaurant
-          restaurant={activeRestaurant}
+          restaurantId={activeRestaurantId}
           className={styles.container}
         />
       ) : (
-        <span>Select Restaurant</span>
+        <div className={styles.alert}>
+          <h3>Select Restaurant...</h3>
+        </div>
       )}
     </main>
   );

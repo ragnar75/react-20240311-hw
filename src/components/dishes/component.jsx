@@ -1,15 +1,14 @@
 import { Dish } from '../dish/component';
 
-export const Dishes = ({ dishes }) => {
+export const Dishes = ({ dishIds }) => {
   return (
     <div>
       <h3>Menu</h3>
       <ul>
-        {!!dishes?.length &&
-          dishes.filter(Boolean).map((dish) => (
-            // added key with unique ids to prevent errors in the console
-            <li key={dish.id}>
-              <Dish dish={dish} />
+        {!!dishIds?.length &&
+          dishIds.filter(Boolean).map((dishId) => (
+            <li key={dishId}>
+              <Dish dishId={dishId} />
             </li>
           ))}
       </ul>

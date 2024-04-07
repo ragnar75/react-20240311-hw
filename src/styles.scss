@@ -15,13 +15,14 @@ h2 {
   margin: 15px 0 5px 0;
 }
 
-h3,
-h4 {
+h3 {
   margin: 5px 0;
 }
 
 ul {
-  margin: 0 0 10px 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 p {
@@ -38,4 +39,14 @@ p {
     opacity: 0.5;
     cursor: not-allowed;
   }
+}
+
+@mixin btnPrimary {
+  background-color: #0a5ed7;
+  color: #fff;
+}
+
+@mixin btnSecondary {
+  background-color: #6a757d;
+  color: #fff;
 }

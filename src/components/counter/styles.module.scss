@@ -1,4 +1,4 @@
-@use '../../styles.scss';
+// @use '../../styles.scss';
 
 .root {
   button:first-child {
@@ -7,16 +7,4 @@
   button:last-child {
     margin-left: 5px;
   }
-}
-
-.primary {
-  @include styles.btn;
-  background-color: #0a5ed7;
-  color: #fff;
-}
-
-.secondary {
-  @include styles.btn;
-  background-color: #6a757d;
-  color: #fff;
 }

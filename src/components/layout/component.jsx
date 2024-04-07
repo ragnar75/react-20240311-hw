@@ -1,63 +1,35 @@
-import { useState } from 'react';
-import { HeaderContext } from '../../contexts/header';
+import { useMemo } from 'react';
 import { Header } from '../header/component';
+import { Footer } from '../footer/component';
+
+import { ThemeContext, useTheme } from '../../contexts/theme';
+import { UserContext, useUser } from '../../contexts/user';
+
 import styles from './styles.module.scss';
 
 export const Layout = ({ children }) => {
-  const [header, setHeader] = useState({
-    status: 'unauthorized',
-    theme: 'default',
-  });
+  const { theme, toggleTheme } = useTheme();
+  const { user, login, logout } = useUser();
 
-  // Is there any easier method to toggle between string values of an object using setState(), than my implementation?
+  const themeContextValue = useMemo(
+    () => ({ theme, toggleTheme }),
+    [theme, toggleTheme]
+  );
+
+  const userContextValue = useMemo(
+    () => ({ user, login, logout }),
+    [user, login, logout]
+  );
 
   return (
-    <div>
-      <HeaderContext.Provider value={header}>
-        <Header>
-          <div>
-            <button
-              className={styles.btnHeader}
-              onClick={() =>
-                setHeader((prevState) => ({
-                  ...prevState,
-                  theme:
-                    header.theme === 'default'
-                      ? 'alternate'
-                      : header.theme === 'alternate'
-                      ? 'default'
-                      : 'alternate',
-                }))
-              }
-            >
-              Toggle Theme
-            </button>
-          </div>
-          <div>
-            <span className={styles.authHeader}>
-              {header.status === 'authorized' ? 'John Doe' : 'User'}
-            </span>
-            <button
-              className={styles.btnHeader}
-              onClick={() =>
-                setHeader((prevState) => ({
-                  ...prevState,
-                  status:
-                    header.status === 'unauthorized'
-                      ? 'authorized'
-                      : header.status === 'authorized'
-                      ? 'unauthorized'
-                      : 'authorized',
-                }))
-              }
-            >
-              {header.status === 'authorized' ? 'Logout' : 'Login'}
-            </button>
-          </div>
-        </Header>
-        {children}
-      </HeaderContext.Provider>
-      <footer>footer</footer>
-    </div>
+    <ThemeContext.Provider value={themeContextValue}>
+      <UserContext.Provider value={userContextValue}>
+        <div>
+          <Header />
+          {children}
+          <Footer />
+        </div>
+      </UserContext.Provider>
+    </ThemeContext.Provider>
   );
 };
