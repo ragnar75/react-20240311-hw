@@ -1,0 +1,11 @@
+@use '../../styles.scss';
+
+.primary {
+  @include styles.btn;
+  @include styles.btnPrimary;
+}
+
+.secondary {
+  @include styles.btn;
+  @include styles.btnSecondary;
+}

@@ -1,16 +1,20 @@
-import { Tab } from '../tab/component';
+import { useSelector } from 'react-redux';
+import { RestaurantTab } from '../restaurant-tab/component';
+import styles from './styles.module.scss';
 
-export const RestaurantTabs = ({ restaurants, onTabClick, activeTabIndex }) => {
+export const RestaurantTabs = ({ onTabClick, activeRestaurantId }) => {
+  const restaurantIds = useSelector((state) => state.restaurant.ids);
+
   return (
-    <nav>
-      {!!restaurants?.length &&
-        restaurants.map((restaurant, index) => (
-          <Tab
-            key={restaurant.id}
-            title={restaurant.name}
-            isActive={index === activeTabIndex}
+    <nav className={styles.root}>
+      {!!restaurantIds?.length &&
+        restaurantIds?.map((restaurantId) => (
+          <RestaurantTab
+            key={restaurantId}
+            restaurantId={restaurantId}
+            isActive={restaurantId === activeRestaurantId}
             onClick={() => {
-              onTabClick(index);
+              onTabClick(restaurantId);
             }}
           />
         ))}

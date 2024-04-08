@@ -1,0 +1,52 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body,
+button {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 1rem;
+}
+
+h2 {
+  margin: 15px 0 5px 0;
+}
+
+h3 {
+  margin: 5px 0;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  margin: 0 0 5px 0;
+}
+
+@mixin btn {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+@mixin btnPrimary {
+  background-color: #0a5ed7;
+  color: #fff;
+}
+
+@mixin btnSecondary {
+  background-color: #6a757d;
+  color: #fff;
+}
