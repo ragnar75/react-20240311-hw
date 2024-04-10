@@ -3,9 +3,9 @@ import { useDispatch } from 'react-redux';
 import { Restaurant } from '../restaurant/component';
 import { RestaurantTabs } from '../restaurant-tabs/component';
 import { getStorageItem, setStorageItem } from '../../utils/storage';
+import { fetchRestaurants } from '../../redux/entities/restaurant/thunks/fetch-restaurants';
 
 import styles from './styles.module.scss';
-import { fetchRestaurants } from '../../redux/entities/restaurant/thunks/fetch-restaurants';
 
 export const Restaurants = () => {
   const [activeRestaurantId, setActiveRestaurantId] = useState(() =>
@@ -34,7 +34,7 @@ export const Restaurants = () => {
       {activeRestaurantId ? (
         <Restaurant
           restaurantId={activeRestaurantId}
-          className={styles.container}
+          className={styles.restaurantContainer}
         />
       ) : (
         <div className={styles.alert}>

@@ -6,7 +6,7 @@ export const selectRestaurantById = (state, id) =>
   selectRestaurantModule(state).entities[id];
 
 export const selectRestaurantDishIds = (state, id) =>
-  selectRestaurantById(state, id)?.dishes;
+  selectRestaurantById(state, id)?.menu;
 
   export const selectRestaurantReviewIds = (state, id) =>
   selectRestaurantById(state, id)?.reviews;

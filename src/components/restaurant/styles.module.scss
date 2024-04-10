@@ -1,0 +1,12 @@
+.restaurantContainer {
+  width: 45%;
+}
+
+img{
+  max-height: 250px;
+  width: 100%;
+  object-fit: cover;
+  border: 1px solid #ddd;
+  border-radius: 25px;
+  padding: 5px;
+}

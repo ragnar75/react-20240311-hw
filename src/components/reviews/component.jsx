@@ -15,9 +15,6 @@ export const Reviews = ({ restaurantId }) => {
     useSelector((state) => selectRestaurantReviewIds(state, restaurantId)) ||
     [];
 
-  console.log('restaurantId: ' + restaurantId);
-  console.log(reviewIds);
-
   if (!reviewIds.filter(Boolean)?.length) {
     return null;
   }

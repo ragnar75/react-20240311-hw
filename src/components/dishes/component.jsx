@@ -13,10 +13,7 @@ export const Dishes = ({ restaurantId }) => {
 
   const dishIds =
     useSelector((state) => selectRestaurantDishIds(state, restaurantId)) || [];
-
-  console.log('restaurantId: ' + restaurantId);
-  console.log(dishIds);
-
+  
   return (
     <div>
       <h3>Menu</h3>
