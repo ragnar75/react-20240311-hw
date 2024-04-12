@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 export const RestaurantTabs = ({ onTabClick, activeRestaurantId }) => {
   // const restaurantIds = useSelector((state) => state.restaurant.ids);
 
-  const restaurantIds = useSelector(selectRestaurantIds)
+  const restaurantIds = useSelector(selectRestaurantIds)  
 
   return (
     <nav className={styles.root}>
