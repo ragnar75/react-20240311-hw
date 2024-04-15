@@ -3,15 +3,10 @@ import { selectUserIds } from '../selectors';
 
 export const fetchUsers = createAsyncThunk(
   'user/fetchUsers',
-  async (_, { rejectWithValue }) => {
+  async () => {
     const response = await fetch('http://localhost:3001/api/users');
-    const result = await response.json();
 
-    if (result.length === 0) {
-      return rejectWithValue('no data');
-    }
-
-    return result;
+    return response.json();
   },
   {
     condition: (_, { getState }) => !selectUserIds(getState())?.length,

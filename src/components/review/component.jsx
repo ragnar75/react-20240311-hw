@@ -1,24 +1,15 @@
-import { useSelector } from 'react-redux';
-import { User } from '../user/component';
-import { selectReviewById } from '../../redux/entities/review/selectors';
+import { UserContainer } from '../user/container';
+
 import styles from './styles.module.scss';
 
-export const Review = ({ reviewId }) => {
-  // const review = useSelector((state) => state.review.entities[reviewId]);
-
-  const review = useSelector((state) => selectReviewById(state, reviewId));
-
-  if (!review) {
-    return null;
-  }
-
+export const Review = ({ review }) => {
   return (
     <div className={styles.reviewContainer}>
       <p>Rating: {review?.rating}</p>
       <p>
         <em>{review?.text}</em>
       </p>
-      <User userId={review?.userId} />
+      <UserContainer userId={review?.userId} />
     </div>
   );
 };

@@ -4,12 +4,12 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState: {},
   reducers: {
-    incrementProduct: (state, { payload: id }) => {
-      const product = state[id] || 0;
+    incrementDish: (state, { payload: id }) => {
+      const dish = state[id] || 0;
 
-      state[id] = product + 1;
+      state[id] = dish + 1;
     },
-    decrementProduct: (state, { payload: id }) => {
+    decrementDish: (state, { payload: id }) => {
       state[id] = (state[id] || 0) - 1;
 
       if (state[id] <= 0) {
@@ -19,4 +19,4 @@ export const cartSlice = createSlice({
   },
 });
 
-export const { incrementProduct, decrementProduct } = cartSlice.actions;
+export const { incrementDish, decrementDish } = cartSlice.actions;

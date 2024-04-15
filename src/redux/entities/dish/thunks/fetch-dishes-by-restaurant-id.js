@@ -4,18 +4,12 @@ import { selectDishIds } from '../selectors';
 
 export const fetchDishesByRestaurantId = createAsyncThunk(
   'dishes/fetchDishesByRestaurantId',
-  async (restaurantId, { rejectWithValue }) => {
+  async (restaurantId) => {
     const response = await fetch(
       `http://localhost:3001/api/dishes?restaurantId=${restaurantId}`
     );
 
-    const result = await response.json();
-
-    if (result.length === 0) {
-      return rejectWithValue('no data');
-    }
-
-    return await result;
+    return response.json();
   },
   {
     condition: (restaurantId, { getState }) => {
@@ -23,7 +17,7 @@ export const fetchDishesByRestaurantId = createAsyncThunk(
       const restaurantDishIds = selectRestaurantDishIds(state, restaurantId);
       const dishIds = selectDishIds(state);
 
-      return restaurantDishIds.some((id) => !dishIds.includes(id));
+      return restaurantDishIds.some((dishId) => !dishIds.includes(dishId));
     },
   }
 );

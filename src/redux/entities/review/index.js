@@ -1,7 +1,5 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { fetchReviewsByRestaurantId } from './thunks/fetch-reviews-by-restaurant-id';
-// import { normalizedReviews } from '../../../constants/normalized-mock';
-// import { convertArrayToObject } from '../../../utils/helper';
 
 const reviewAdapter = createEntityAdapter();
 

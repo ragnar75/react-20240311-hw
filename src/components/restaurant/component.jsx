@@ -1,33 +1,19 @@
-import { useSelector } from 'react-redux';
-import { Dishes } from '../dishes/component';
-import { Reviews } from '../reviews/component';
-import { selectRestaurantById } from '../../redux/entities/restaurant/selectors';
+import classNames from 'classnames';
+import { MenuContainer } from '../menu/container';
+import { ReviewsContainer } from '../reviews/container';
 
 import styles from './styles.module.scss';
-import classNames from 'classnames';
 
-export const Restaurant = ({ restaurantId, className }) => {
-  // const restaurant = useSelector(
-  //   (state) => state.restaurant.entities[restaurantId]
-  // );
-
-  const restaurant = useSelector((state) =>
-    selectRestaurantById(state, restaurantId)
-  );
-
-  if (!restaurant) {
-    return null;
-  }
-
+export const Restaurant = ({ restaurant, className }) => {
   return (
-    <div className={classNames(className, styles.restaurantContainer )}>
+    <div className={classNames(className, styles.restaurantContainer)}>
       <h2>{restaurant?.name}</h2>
       <img
         src={restaurant?.img}
         alt={restaurant?.description}
       />
-      <Dishes restaurantId={restaurantId} />
-      <Reviews restaurantId={restaurantId} />
+      <MenuContainer restaurantId={restaurant?.id} />
+      <ReviewsContainer restaurantId={restaurant?.id} />
     </div>
   );
 };

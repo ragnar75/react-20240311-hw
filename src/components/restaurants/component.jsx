@@ -1,38 +1,21 @@
-import { useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { Restaurant } from '../restaurant/component';
-import { RestaurantTabs } from '../restaurant-tabs/component';
-import { getStorageItem, setStorageItem } from '../../utils/storage';
-import { fetchRestaurants } from '../../redux/entities/restaurant/thunks/fetch-restaurants';
+import { RestaurantTabsContainer } from '../restaurant-tabs/container';
+import { RestaurantContainer } from '../restaurant/container';
+import { Button } from '../button/component';
 
 import styles from './styles.module.scss';
 
-export const Restaurants = () => {
-  const [activeRestaurantId, setActiveRestaurantId] = useState(() =>
-    getStorageItem(import.meta.env.VITE_ACTIVE_RESTAURANT_INDEX_STORAGE_KEY)
-  );
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchRestaurants());
-  }, []);
-
+export const Restaurants = ({ activeRestaurantId, onTabClick, onRefresh }) => {
   return (
     <main>
-      <RestaurantTabs
+      <RestaurantTabsContainer
         activeRestaurantId={activeRestaurantId}
-        onTabClick={(activeRestaurantId) => {
-          setActiveRestaurantId(activeRestaurantId);
-          setStorageItem(
-            import.meta.env.VITE_ACTIVE_RESTAURANT_INDEX_STORAGE_KEY,
-            activeRestaurantId
-          );
-        }}
+        onTabClick={onTabClick}
       />
+      <Button onClick={onRefresh}>Refresh</Button>
+      
 
       {activeRestaurantId ? (
-        <Restaurant
+        <RestaurantContainer
           restaurantId={activeRestaurantId}
           className={styles.restaurantContainer}
         />

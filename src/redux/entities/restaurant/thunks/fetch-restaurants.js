@@ -3,17 +3,13 @@ import { selectRestaurantIds } from '../selectors';
 
 export const fetchRestaurants = createAsyncThunk(
   'restaurant/fetchRestaurants',
-  async (_, { rejectWithValue }) => {
+  async () => {
     const response = await fetch('http://localhost:3001/api/restaurants');
-    const result = await response.json();
 
-    if (result.length === 0) {
-      return rejectWithValue('no data');
-    }
-
-    return result;
+    return response.json();
   },
   {
-    condition: (_, { getState }) => !selectRestaurantIds(getState())?.length,
+    condition: ({ forceReload = false } = {}, { getState }) =>
+      forceReload || !selectRestaurantIds(getState())?.length,
   }
 );

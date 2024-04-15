@@ -1,7 +1,7 @@
 export const selectCartModule = (state) => state.cart;
 
-export const selectCartProductIds = (state) =>
+export const selectCartDishIds = (state) =>
   Object.keys(selectCartModule(state));
 
-export const selectCartProductAmount = (state, productId) =>
-  selectCartModule(state)[productId] || 0;
+export const selectCartDishAmount = (state, dishId) =>
+  selectCartModule(state)[dishId] || 0;

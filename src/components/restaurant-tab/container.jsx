@@ -1,12 +1,8 @@
 import { useSelector } from 'react-redux';
-import { Button } from '../button/component';
+import { Tab } from '../tab/component';
 import { selectRestaurantById } from '../../redux/entities/restaurant/selectors';
 
-export const RestaurantTab = ({ restaurantId, isActive, onClick }) => {
-  // const restaurant = useSelector(
-  //   (state) => state.restaurant.entities[restaurantId]
-  // );
-
+export const RestaurantTabContainer = ({ restaurantId, isActive, onClick }) => {
   const restaurant = useSelector((state) =>
     selectRestaurantById(state, restaurantId)
   );
@@ -16,11 +12,10 @@ export const RestaurantTab = ({ restaurantId, isActive, onClick }) => {
   }
 
   return (
-    <Button
+    <Tab
+      title={restaurant?.name}
       onClick={onClick}
       disabled={isActive}
-    >
-      {restaurant?.name}
-    </Button>
+    />
   );
 };

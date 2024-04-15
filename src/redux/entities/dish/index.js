@@ -1,6 +1,4 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
-// import { normalizedDishes } from '../../../constants/normalized-mock';
-// import { convertArrayToObject } from '../../../utils/helper';
 import { fetchDishesByRestaurantId } from './thunks/fetch-dishes-by-restaurant-id';
 
 const dishAdapter = createEntityAdapter();
