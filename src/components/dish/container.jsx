@@ -1,14 +1,16 @@
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Dish } from './component';
 import { useCurrentUser } from '../../contexts/user';
-import { selectDishById } from '../../redux/entities/dish/selectors';
 import { decrementDish, incrementDish } from '../../redux/ui/cart';
 import { selectCartDishAmount } from '../../redux/ui/cart/selectors';
+import { useGetDishByDishIdQuery } from '../../redux/service/api';
 
-export const DishContainer = ({ dishId, ...props }) => {
+export const DishContainer = () => {
   const { user } = useCurrentUser();
+  const { dishId } = useParams();
+  const { currentData: dish, isLoading } = useGetDishByDishIdQuery(dishId);
 
-  const dish = useSelector((state) => selectDishById(state, dishId));
   const amount = useSelector((state) => selectCartDishAmount(state, dishId));
 
   const dispatch = useDispatch();
@@ -16,13 +18,16 @@ export const DishContainer = ({ dishId, ...props }) => {
   const decrement = () => dispatch(decrementDish(dishId));
   const increment = () => dispatch(incrementDish(dishId));
 
+  if (isLoading) {
+    return <div>Loading Dish...</div>;
+  }
+
   if (!dish) {
     return null;
   }
 
   return (
     <Dish
-      {...props}
       dish={dish}
       isAuthorized={!!user}
       amount={amount}

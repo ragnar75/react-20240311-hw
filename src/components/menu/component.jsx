@@ -1,13 +1,18 @@
-import { DishContainer } from '../dish/container';
+import { Link } from 'react-router-dom';
 
-export const Menu = ({ dishIds }) => {
+import styles from './styles.module.scss';
+
+export const Menu = ({ dishes }) => {
   return (
-    <div>
-      <h3>Menu</h3>
+    <div className={styles.menuContainer}>
       <ul>
-        {dishIds.map((dishId) => (
-          <li key={dishId}>
-            <DishContainer dishId={dishId} />
+        {dishes.map((dish) => (
+          <li key={dish.id}>
+            <Link to={`/dish/${dish.id}`}>
+              <div>
+                <strong>{dish.name}</strong>
+              </div>
+            </Link>
           </li>
         ))}
       </ul>

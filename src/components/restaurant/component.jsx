@@ -1,19 +1,37 @@
+import { NavLink, Outlet } from 'react-router-dom';
 import classNames from 'classnames';
-import { MenuContainer } from '../menu/container';
-import { ReviewsContainer } from '../reviews/container';
 
 import styles from './styles.module.scss';
 
-export const Restaurant = ({ restaurant, className }) => {
+export const Restaurant = ({ id, name, className }) => {
   return (
     <div className={classNames(className, styles.restaurantContainer)}>
-      <h2>{restaurant?.name}</h2>
-      <img
-        src={restaurant?.img}
-        alt={restaurant?.description}
-      />
-      <MenuContainer restaurantId={restaurant?.id} />
-      <ReviewsContainer restaurantId={restaurant?.id} />
+      <div className={styles.contentContainer}>
+        <h2>{name}</h2>
+        <div className={styles.linkContainer}>
+          <NavLink
+            to={`../${id}/menu`}
+            style={({ isActive }) => {
+              return isActive
+                ? { backgroundColor: 'orangered', color: 'white' }
+                : {};
+            }}
+          >
+            <h3>Menu</h3>
+          </NavLink>
+          <NavLink
+            to={`../${id}/reviews`}
+            style={({ isActive }) => {
+              return isActive
+                ? { backgroundColor: 'orangered', color: 'white' }
+                : {};
+            }}
+          >
+            <h3>Reviews</h3>
+          </NavLink>
+        </div>
+        <Outlet />
+      </div>
     </div>
   );
 };

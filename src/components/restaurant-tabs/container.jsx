@@ -1,18 +1,23 @@
-import { useSelector } from 'react-redux';
 import { RestaurantTabs } from './component';
-import { selectRestaurantIds } from '../../redux/entities/restaurant/selectors';
+import { useGetRestaurantsQuery } from '../../redux/service/api';
+import { RestaurantsSkeleton } from '../restaurants/skeleton';
+import { Outlet } from 'react-router-dom';
 
-export const RestaurantTabsContainer = (props) => {
-  const restaurantIds = useSelector(selectRestaurantIds);
+export const RestaurantTabsContainer = () => {
+  const { currentData: restaurants, isLoading } = useGetRestaurantsQuery();
 
-  if (!restaurantIds?.length) {
+  if (isLoading) {
+    return <RestaurantsSkeleton />;
+  }
+
+  if (!restaurants?.length) {
     return null;
   }
 
   return (
-    <RestaurantTabs
-      {...props}
-      restaurantIds={restaurantIds}
-    />
+    <div>
+      <RestaurantTabs restaurants={restaurants} />
+      <Outlet />
+    </div>
   );
 };

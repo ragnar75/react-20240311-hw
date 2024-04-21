@@ -1,20 +1,37 @@
-import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import { Restaurant } from './component';
-import { selectRestaurantById } from '../../redux/entities/restaurant/selectors';
+import { useGetRestaurantsQuery } from '../../redux/service/api';
 
-export const RestaurantContainer = ({ restaurantId, className }) => {
-  const restaurant = useSelector((state) =>
-    selectRestaurantById(state, restaurantId)
+export const RestaurantContainer = () => {
+  const { restaurantId } = useParams();
+
+  const { currentData: restaurant, isLoading } = useGetRestaurantsQuery(
+    undefined,
+    {
+      selectFromResult: (result) => ({
+        ...result,
+        currentData: result.currentData?.find(({ id }) => id === restaurantId),
+      }),
+    }
   );
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   if (!restaurant) {
     return null;
   }
 
+
+
+  const { id, name } = restaurant;
+
   return (
     <Restaurant
-      restaurant={restaurant}
-      className={className}
+      id={id}
+      name={name}
+      // className={className}
     />
   );
 };

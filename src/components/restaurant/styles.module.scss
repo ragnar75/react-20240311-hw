@@ -1,12 +1,34 @@
 .restaurantContainer {
-  width: 45%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  // border: 1px solid green;
 }
 
-img {
-  max-height: 250px;
+.contentContainer {
   width: 100%;
-  object-fit: cover;
-  border: 1px solid #ddd;
-  border-radius: 25px;
-  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  // border: 1px solid red;
+}
+
+.linkContainer {
+  width: 50%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
+  // border: 1px solid red;
+
+  a {
+    text-decoration: none;
+    color: black;
+    padding: 0 10px;
+    
+    &:hover {
+      background-color: orangered;
+      color: white;
+    }
+  }
 }

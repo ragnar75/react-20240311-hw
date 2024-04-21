@@ -1,4 +1,3 @@
-export const User = ({ user }) => {
-  
-  return <div>{user?.name}</div>;
+export const User = ({ name }) => {
+  return <div>{name}</div>;
 };

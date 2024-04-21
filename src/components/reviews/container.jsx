@@ -1,33 +1,46 @@
-import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { Reviews } from './component';
-import { useRequest } from '../../hooks/use-request';
+import { NewReviewForm } from '../new-review-form/component';
+import { Button } from '../button/component';
+import { useGetReviewsByRestaurantIdQuery } from '../../redux/service/api';
 
-import { REQUEST_STATUSES } from '../../redux/ui/request/constants';
-import { selectRestaurantReviewIds } from '../../redux/entities/restaurant/selectors';
-import { fetchReviewsByRestaurantId } from '../../redux/entities/review/thunks/fetch-reviews-by-restaurant-id';
-import { fetchUsers } from '../../redux/entities/user/thunks/fetch-users';
+import styles from './styles.module.scss';
 
-export const ReviewsContainer = ({ restaurantId }) => {
-  const reviewRequestStatus = useRequest(
-    fetchReviewsByRestaurantId,
-    restaurantId
-  );
-  const userRequestStatus = useRequest(fetchUsers);
+export const ReviewsContainer = () => {
+  const { restaurantId } = useParams();
+  const [isShow, setIsShow] = useState(false);
 
-  const reviewIds = useSelector((state) =>
-    selectRestaurantReviewIds(state, restaurantId)
-  );
+  const {
+    currentData: reviews,
+    isLoading,
+    refetch,
+  } = useGetReviewsByRestaurantIdQuery(restaurantId);
 
-  if (
-    reviewRequestStatus === REQUEST_STATUSES.pending ||
-    userRequestStatus === REQUEST_STATUSES.pending
-  ) {
+  if (isLoading) {
     return <div>Loading Reviews...</div>;
   }
 
-  if (!reviewIds?.length) {
+  if (!reviews?.length) {
     return null;
   }
 
-  return <Reviews reviewIds={reviewIds} />;
+  
+  return (
+    <section>
+      <div className={styles.buttonsContainer}>
+        <Button onClick={() => setIsShow(true)}>Add Review</Button>
+        
+      {/* I have doubts that refetch() works correctly */}
+        <Button onClick={refetch}>Refetch Reviews</Button>
+      </div>
+      {isShow && (
+        <NewReviewForm
+          restaurantId={restaurantId}
+          setIsShow={setIsShow}
+        />
+      )}
+      <Reviews reviews={reviews} />
+    </section>
+  );
 };

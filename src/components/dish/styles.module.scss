@@ -1,4 +1,11 @@
+.dishContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
 .dish {
+  width: 50%;
   margin-bottom: 20px;
   padding: 15px 20px;
   border-radius: 10px;
@@ -17,6 +24,7 @@
   justify-content: space-between;
   font-size: 1.1rem;
   font-weight: 600;
+  // border: 1px solid red;
 }
 
 .outer {

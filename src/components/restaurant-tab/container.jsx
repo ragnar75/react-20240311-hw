@@ -1,21 +1,21 @@
-import { useSelector } from 'react-redux';
-import { Tab } from '../tab/component';
-import { selectRestaurantById } from '../../redux/entities/restaurant/selectors';
+import { RestaurantTab } from './component';
 
-export const RestaurantTabContainer = ({ restaurantId, isActive, onClick }) => {
-  const restaurant = useSelector((state) =>
-    selectRestaurantById(state, restaurantId)
-  );
-
-  if (!restaurant) {
+export const RestaurantTabContainer = ({
+  restaurantId,
+  restaurantName,
+  restaurantDescription,
+  restaurantImage,
+}) => {
+  if (!restaurantId) {
     return null;
   }
 
   return (
-    <Tab
-      title={restaurant?.name}
-      onClick={onClick}
-      disabled={isActive}
+    <RestaurantTab
+      restaurantId={restaurantId}
+      restaurantName={restaurantName}
+      restaurantDescription={restaurantDescription}
+      restaurantImage={restaurantImage}
     />
   );
 };

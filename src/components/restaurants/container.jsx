@@ -6,6 +6,7 @@ import { getStorageItem, setStorageItem } from '../../utils/storage';
 import { fetchRestaurants } from '../../redux/entities/restaurant/thunks/fetch-restaurants';
 import { useRequest } from '../../hooks/use-request';
 import { useLazyRequest } from '../../hooks/use-lazy-request';
+import { Outlet } from 'react-router-dom';
 
 const reloadRestaurantParams = { forceReload: true };
 
@@ -42,6 +43,7 @@ export const RestaurantsContainer = () => {
         onTabClick={onTabClick}
         onRefresh={refetchRestaurants}
       />
+      <Outlet />
     </div>
   );
 };
