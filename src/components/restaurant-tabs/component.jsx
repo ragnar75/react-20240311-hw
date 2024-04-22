@@ -1,23 +1,18 @@
-import { useSelector } from 'react-redux';
-import { RestaurantTab } from '../restaurant-tab/component';
+import { RestaurantTabContainer } from '../restaurant-tab/container';
 import styles from './styles.module.scss';
 
-export const RestaurantTabs = ({ onTabClick, activeRestaurantId }) => {
-  const restaurantIds = useSelector((state) => state.restaurant.ids);
-
+export const RestaurantTabs = ({ restaurants }) => {
   return (
     <nav className={styles.root}>
-      {!!restaurantIds?.length &&
-        restaurantIds?.map((restaurantId) => (
-          <RestaurantTab
-            key={restaurantId}
-            restaurantId={restaurantId}
-            isActive={restaurantId === activeRestaurantId}
-            onClick={() => {
-              onTabClick(restaurantId);
-            }}
-          />
-        ))}
+      {restaurants.map((restaurant) => (
+        <RestaurantTabContainer
+          key={restaurant.id}
+          restaurantId={restaurant.id}
+          restaurantName={restaurant.name}
+          restaurantDescription={restaurant.description}
+          restaurantImage={restaurant.img}
+        />
+      ))}
     </nav>
   );
 };

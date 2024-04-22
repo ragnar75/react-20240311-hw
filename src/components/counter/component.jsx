@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { Button } from '../button/component';
 import styles from './styles.module.scss';
 
-
 export const Counter = ({
   value,
   decrement,

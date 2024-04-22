@@ -1,17 +1,15 @@
-import { Review } from '../review/component';
+import { ReviewContainer } from '../review/container';
 
-export const Reviews = ({ reviewIds }) => {
-  if (!reviewIds.filter(Boolean).length) {
-    return null;
-  }
-
+export const Reviews = ({ reviews }) => {
   return (
     <div>
-      <h3>{`${reviewIds.length}${reviewIds.length > 1 ? ' Reviews': ' Review'}`}</h3>
+      {/* <h3>{`${reviewIds.length}${
+        reviewIds.length > 1 ? ' Reviews' : ' Review'
+      }`}</h3> */}
       <ul>
-        {reviewIds?.map((reviewId) => (
-          <li key={reviewId}>
-            <Review reviewId={reviewId} />
+        {reviews.map((review) => (
+          <li key={review.id}>
+            <ReviewContainer review={review} />
           </li>
         ))}
       </ul>

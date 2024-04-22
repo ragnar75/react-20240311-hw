@@ -1,21 +1,26 @@
-import { useSelector } from 'react-redux';
-import { Button } from '../button/component';
+import { NavLink } from 'react-router-dom';
 
-export const RestaurantTab = ({ restaurantId, isActive, onClick }) => {
-  const restaurant = useSelector(
-    (state) => state.restaurant.entities[restaurantId]
-  );
+import styles from './styles.module.scss';
 
-  if (!restaurant) {
-    return null;
-  }
-
+export const RestaurantTab = ({
+  restaurantId,
+  restaurantName,
+  restaurantImage,
+  restaurantDescription,
+}) => {
   return (
-    <Button
-      onClick={onClick}
-      disabled={isActive}
+    <NavLink
+      to={`/restaurants/${restaurantId}`}
+      style={({ isActive }) => {
+        return isActive ? { backgroundColor: 'orangered', color: 'white' } : {};
+      }}
+      className={styles.tabLink}
     >
-      {restaurant?.name}
-    </Button>
+      <img
+        src={restaurantImage}
+        alt={restaurantDescription}
+      />
+      <h3>{restaurantName}</h3>
+    </NavLink>
   );
 };
